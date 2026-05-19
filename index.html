@@ -399,29 +399,63 @@
   <span>THPT Vĩnh Xuân – ONLINE</span>
 </div>
 
-<!-- FEEDBACK MODAL -->
 <div class="modal-overlay" id="feedbackModal">
-  <div class="modal">
-    <div class="modal-header">
-      <h3>📬 Gửi ý kiến phản hồi</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSfHP5RRqm_vSa1Vv-VrfyPkGx4UfMlJZz5BZPM5elPQpIYdtA/formResponse" method="POST" target="hidden_iframe" id="feedbackForm" style="margin:0; padding:0;">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>📬 Gửi ý kiến phản hồi</h3>
+        <button type="button" class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-form-body">
+        <label>Họ và tên</label>
+        <input type="text" name="entry.1079995345" id="fb-name" placeholder="Tên của bạn là gì..." required>
+        
+        <label>Nội dung</label>
+        <textarea name="entry.2005914619" id="fb-content" placeholder="Nhập nội dung" required></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" style="color:#888" onclick="document.getElementById('feedbackForm').reset(); closeModal();">Hủy</button>
+        <button type="submit" class="btn-dark">Gửi phản hồi →</button>
+      </div>
+      <div class="success-msg" id="success-msg">
+        <div class="check">✅</div>
+        <div>Cảm ơn bạn đã gửi phản hồi!<br>Chúng tôi sẽ xem xét và cải thiện sớm nhất.</div>
+      </div>
     </div>
-    <div class="modal-body" id="modal-form-body">
-      <label>Họ và tên</label>
-      <input type="text" id="fb-name" placeholder="Tên của bạn là gì...">
-      <label>Nội dung</label>
-      <textarea id="fb-content" placeholder="Nhập nội dung"></textarea>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" style="color:#888" onclick="closeModal()">Hủy</button>
-      <button class="btn-dark" onclick="submitFeedback()">Gửi phản hồi →</button>
-    </div>
-    <div class="success-msg" id="success-msg">
-      <div class="check">✅</div>
-      <div>Cảm ơn bạn đã gửi phản hồi!<br>Chúng tôi sẽ xem xét và cải thiện sớm nhất.</div>
-    </div>
-  </div>
+  </form>
 </div>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleFormResponse()"></iframe>
+
+<script>
+  let isSubmitting = false;
+
+  // Lắng nghe sự kiện khi người dùng bấm gửi Form
+  document.getElementById('feedbackForm').onsubmit = function() {
+    isSubmitting = true;
+  };
+
+  // Hàm xử lý sau khi dữ liệu đã gửi lên Google Form thành công
+  function handleFormResponse() {
+    if (isSubmitting) {
+      // 1. Hiển thị khung thông báo thành công có sẵn của bạn
+      const successMsg = document.getElementById('success-msg');
+      if (successMsg) {
+        successMsg.style.display = 'flex'; // Hoặc block tùy thuộc CSS của bạn
+      }
+      
+      // 2. Tự động xóa nội dung đã nhập trong các ô input
+      document.getElementById('feedbackForm').reset();
+      
+      // 3. Chờ 2.5 giây cho người dùng nhìn thấy thông báo rồi tự đóng modal
+      setTimeout(() => {
+        if (successMsg) successMsg.style.display = 'none';
+        closeModal();
+        isSubmitting = false;
+      }, 2500);
+    }
+  }
+</script>
 
 <script src="script.js"></script>
 </body>
