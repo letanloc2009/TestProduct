@@ -1,0 +1,1517 @@
+/* ==================== ROOT VARIABLES ==================== */
+:root {
+  --bg: #f0f7ff;
+  --surface: #ffffff;
+  --border: #d1e3f8;
+  --text: #1a2640;
+  --muted: #6b82a0;
+
+  --physics: #e74c3c;
+  --physics-light: #fdecea;
+  --physics-mid: #f5a9a4;
+  --chem: #2980b9;
+  --chem-light: #ebf5fb;
+  --chem-mid: #85c1e9;
+  --bio: #27ae60;
+  --bio-light: #eafaf1;
+  --bio-mid: #82e0aa;
+
+  --header-h: 60px;
+  --sidebar-w: 260px;
+  --radius: 12px;
+  --shadow: 0 2px 16px rgba(60,100,180,0.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--header-h);
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 50%, #42a5f5 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 20px rgba(21,101,192,0.3);
+}
+
+.header-brand {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.brand-logo { font-size: 22px; }
+
+.brand-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.header-center {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.1em;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px; height: 40px;
+  gap: 5px;
+  cursor: pointer;
+  background: none; border: none; padding: 0;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: #fff; border-radius: 2px; transition: all .25s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.header-actions { display:flex; align-items:center; }
+
+.btn-mail {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.btn-mail:hover { background: rgba(255,255,255,0.35); }
+
+.layout {
+  display: flex;
+  margin-top: var(--header-h);
+  min-height: calc(100vh - var(--header-h));
+}
+
+aside {
+  width: var(--sidebar-w);
+  min-height: calc(100vh - var(--header-h));
+  background: var(--surface);
+  border-right: 2px solid var(--border);
+  padding: 12px 0 60px;
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  flex-shrink: 0;
+  transition: transform .3s ease;
+  z-index: 90;
+  box-shadow: 2px 0 12px rgba(60,100,180,0.06);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 89;
+}
+.sidebar-overlay.open { display: block; }
+
+.nav-home {
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  color: #1565c0;
+  background: #e8f1ff;
+  border-radius: 0 30px 30px 0;
+  margin: 0 12px 8px 0;
+  transition: background .15s;
+  letter-spacing: 0.05em;
+}
+.nav-home:hover { background: #d0e4ff; }
+
+.subject-group { margin-bottom: 4px; }
+
+.subject-toggle {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  transition: background .15s;
+  user-select: none;
+  border-radius: 0;
+}
+.subject-toggle:hover { background: #f5f8ff; }
+
+.subj-icon { font-size: 16px; }
+
+.arrow {
+  font-size: 18px;
+  transition: transform .25s;
+  margin-left: auto;
+  font-weight: 400;
+}
+.arrow.open { transform: rotate(90deg); }
+
+.physics-color { color: var(--physics); }
+.chem-color { color: var(--chem); }
+.bio-color { color: var(--bio); }
+
+.subject-items {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s cubic-bezier(.4,0,.2,1);
+}
+.subject-items.open { max-height: 600px; }
+
+.nav-item {
+  display: flex; align-items: center;
+  padding: 11px 20px 11px 36px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  color: var(--muted);
+  border-radius: 0 30px 30px 0;
+  margin-right: 12px;
+}
+.nav-item:hover { background: #f0f7ff; color: #1565c0; }
+.nav-item.active { background: #ddeeff; color: #1565c0; font-weight: 700; }
+
+main {
+  flex: 1;
+  padding: 28px 36px 70px;
+  min-width: 0;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+.page-header {
+  margin-bottom: 24px;
+  padding: 20px 24px;
+  border-radius: var(--radius);
+  display: flex; align-items: center; gap: 14px;
+}
+.physics-header { background: linear-gradient(135deg, #fdecea, #fbbaba33); border-left: 4px solid var(--physics); }
+.chem-header { background: linear-gradient(135deg, #ebf5fb, #85c1e933); border-left: 4px solid var(--chem); }
+.bio-header { background: linear-gradient(135deg, #eafaf1, #82e0aa33); border-left: 4px solid var(--bio); }
+
+.page-header h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.page-badge {
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+.physics-badge { background: var(--physics); color: #fff; }
+.chem-badge { background: var(--chem); color: #fff; }
+.bio-badge { background: var(--bio); color: #fff; }
+
+.hero {
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 40%, #4fc3f7 100%);
+  border-radius: var(--radius);
+  padding: 48px 40px;
+  margin-bottom: 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border-radius: 30px;
+  padding: 6px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.hero-title {
+  font-size: clamp(28px, 5vw, 56px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  position: relative;
+}
+.hero-title span { color: #ffe082; }
+
+.hero-sub {
+  color: rgba(255,255,255,0.85);
+  font-size: 15px;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 24px 0 14px;
+  color: var(--text);
+  letter-spacing: 0.03em;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 22px 18px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: var(--shadow);
+  border: 2px solid transparent;
+  text-align: left;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(60,100,180,0.18); }
+
+.physics-card:hover { border-color: var(--physics); }
+.chem-card:hover { border-color: var(--chem); }
+.bio-card:hover { border-color: var(--bio); }
+
+.card-icon { font-size: 30px; margin-bottom: 12px; }
+.card h3 { font-size: 14px; font-weight: 800; margin-bottom: 6px; color: var(--text); }
+.card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+.sim-container {
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  border: 2px solid var(--border);
+}
+
+.sim-toolbar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px;
+  background: #1a2640;
+  flex-wrap: wrap;
+}
+
+.sim-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: #7cb9ff;
+  flex: 1;
+  min-width: 0;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.btn-physics { background: var(--physics); color: #fff; }
+.btn-physics:hover { background: #c0392b; }
+.btn-chem { background: var(--chem); color: #fff; }
+.btn-chem:hover { background: #1a6395; }
+.btn-bio { background: var(--bio); color: #fff; }
+.btn-bio:hover { background: #1e8449; }
+.btn-secondary { background: #2a3a55; color: #aac4e6; }
+.btn-secondary:hover { background: #3a4f70; }
+
+.sim-canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 200px;
+  background: #0d1b2a;
+  position: relative;
+}
+
+.sim-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+  padding: 18px;
+  background: #f7fbff;
+  border-top: 2px solid var(--border);
+}
+
+.control-group { display: flex; flex-direction: column; gap: 6px; }
+.control-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+/* .control-group input[type="number"], */
+.control-group input[type="number"] {
+    width: 100%;
+}
+.control-group select {
+  padding: 8px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  outline: none;
+  transition: border-color .15s;
+}
+.control-group input[type="number"]:focus,
+.control-group select:focus { border-color: #1976d2; }
+
+/* Đảm bảo ô input số có chiều rộng đầy đủ và hiển thị đẹp */
+.control-group input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+}
+
+.data-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.data-cell {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--border);
+}
+
+.dc-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.dc-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1565c0;
+}
+
+.dc-unit {
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: 2px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.info-block {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--border);
+}
+
+.info-block h4 {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+
+.info-block ul { list-style: none; }
+.info-block ul li {
+  font-size: 13px;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f4fa;
+  display: flex; align-items: flex-start; gap: 8px;
+  line-height: 1.5; color: var(--text);
+}
+.info-block ul li::before { content: '→'; color: #1976d2; flex-shrink: 0; }
+
+#force-canvas { display: block; max-width: 100%; background: #0d1b2a; }
+
+.coming-soon-page {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  min-height: 55vh; text-align: center; gap: 16px; padding: 40px 20px;
+}
+.coming-soon-page .cs-icon {
+  font-size: 64px; margin-bottom: 8px;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.coming-soon-page h1 {
+  font-size: clamp(28px, 8vw, 52px);
+  font-weight: 900; color: var(--text); letter-spacing: 4px;
+}
+.cs-line { width: 60px; height: 4px; border-radius: 2px; background: var(--physics); margin: 0 auto; }
+.cs-line.bio { background: var(--bio); }
+.coming-soon-page p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 340px; }
+
+.chem-shelf {
+  background: #f8f4e8;
+  border: 2px solid #d4c9a0;
+  border-radius: 10px;
+  margin: 16px;
+  padding: 16px;
+}
+
+.shelf-label {
+  font-size: 13px; font-weight: 700;
+  color: #7a6a30; margin-bottom: 14px;
+}
+
+.shelf-row {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 16px;
+}
+
+.chem-bottle {
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; padding: 8px; border-radius: 10px;
+  border: 2px solid transparent; transition: all .2s;
+  background: rgba(255,255,255,0.7);
+  min-width: 70px;
+}
+.chem-bottle:hover { transform: scale(1.05); border-color: #e74c3c; background: #fff; }
+.chem-bottle.selected { border-color: #e74c3c; background: #fdecea; box-shadow: 0 2px 8px rgba(231,76,60,0.3); }
+
+.bottle-svg { font-size: 28px; margin-bottom: 4px; }
+.bottle-name { font-size: 11px; font-weight: 800; color: var(--text); font-family: 'Space Mono', monospace; }
+.bottle-type { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+.shelf-selected {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  padding: 12px; background: #fff; border-radius: 8px;
+  border: 2px dashed #c9b870;
+}
+
+.selected-slot {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 10px 20px;
+  background: #fffde7;
+  border-radius: 8px; border: 2px solid #f0d060;
+  cursor: pointer; transition: background .15s;
+  min-width: 120px;
+}
+.selected-slot:hover { background: #fff9c4; }
+.slot-label { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; }
+.slot-name { font-size: 14px; font-weight: 800; color: var(--text); font-family: 'Space Mono', monospace; }
+.plus-sign { font-size: 28px; color: #e74c3c; font-weight: 700; }
+
+.litmus-section {
+  margin: 0 16px 16px;
+  padding: 14px;
+  background: #faf0ff;
+  border-radius: 10px;
+  border: 2px solid #e1bee7;
+}
+.litmus-label { font-size: 13px; font-weight: 700; color: #7b1fa2; margin-bottom: 12px; }
+.litmus-display { display: flex; align-items: center; gap: 20px; }
+
+.litmus-paper {
+  width: 80px; height: 36px;
+  background: #9c27b0;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff;
+  transition: background .8s ease;
+  box-shadow: 0 2px 8px rgba(156,39,176,0.3);
+}
+.litmus-result {
+  font-size: 14px; font-weight: 700; color: #7b1fa2;
+}
+
+.beaker-section {
+  padding: 0 16px 16px;
+}
+
+.beaker-wrap {
+  display: flex; align-items: flex-end;
+  gap: 14px; padding: 24px 16px;
+  background: #1a2640;
+  border-radius: 10px;
+  flex-wrap: wrap; justify-content: center;
+  position: relative;
+}
+
+.beaker {
+  width: 75px; height: 130px;
+  border: 3px solid rgba(255,255,255,0.4);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  position: relative;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+
+.beaker-label {
+  position: absolute; top: -28px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px; font-weight: 700;
+  color: #aac4e6; white-space: nowrap;
+  font-family: 'Space Mono', monospace;
+}
+
+.beaker-liquid {
+  width: 100%; border-radius: 0 0 8px 8px;
+  transition: height 0.8s cubic-bezier(.4,0,.2,1), background 0.5s;
+}
+
+.reaction-arrow { font-size: 26px; color: #7cb9ff; padding-bottom: 16px; animation: pulse 1.5s infinite; }
+.plus-sign2 { font-size: 24px; color: #aac4e6; padding-bottom: 16px; }
+@keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+.reaction-equation {
+  background: #e8f5e9;
+  border: 2px solid #a5d6a7;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 0 0 16px;
+}
+.reaction-equation h4 { font-size: 13px; font-weight: 700; color: #2e7d32; margin-bottom: 8px; }
+.equation-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px; color: #1b5e20; font-weight: 700;
+}
+.equation-note { font-size: 12px; color: #388e3c; margin-top: 6px; }
+
+.dna-workspace {
+  padding: 16px;
+  background: #0d1b2a;
+  margin: 0;
+  min-height: 300px;
+}
+
+.dna-bases-box {
+  margin-bottom: 16px;
+}
+
+.dna-box-label {
+  font-size: 13px; font-weight: 700;
+  color: #7cb9ff; margin-bottom: 10px;
+  font-family: 'Space Mono', monospace;
+}
+
+.bases-palette {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+
+.base-chip {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .15s, box-shadow .15s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.base-chip:hover { transform: scale(1.1); }
+.base-chip.sm { padding: 3px 10px; font-size: 12px; margin-right: 6px; }
+
+.base-A { background: #e74c3c; color: #fff; }
+.base-T { background: #3498db; color: #fff; }
+.base-G { background: #2ecc71; color: #fff; }
+.base-C { background: #f39c12; color: #fff; }
+
+.dna-strands {
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.dna-strand-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: max-content;
+}
+
+.dna-strand-row {
+  display: flex; gap: 4px; align-items: center;
+}
+
+.dna-strand-label {
+  font-size: 10px; font-weight: 700;
+  color: #7cb9ff; width: 70px; flex-shrink: 0;
+  font-family: 'Space Mono', monospace;
+}
+
+.dna-base-slot {
+  width: 40px; height: 36px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+  transition: all .15s;
+  border: 2px dashed rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #aaa;
+}
+.dna-base-slot.filled { border-style: solid; color: #fff; }
+.dna-base-slot:hover { background: rgba(255,255,255,0.12); }
+.dna-base-slot.correct { box-shadow: 0 0 8px rgba(46,204,113,0.6); }
+.dna-base-slot.wrong { box-shadow: 0 0 8px rgba(231,76,60,0.6); }
+
+.dna-bonds-row {
+  display: flex; gap: 4px;
+  margin-left: 70px;
+  height: 16px;
+}
+
+.dna-bond {
+  width: 40px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: rgba(255,255,255,0.3);
+  transition: color .3s;
+}
+.dna-bond.active { color: #f39c12; }
+
+.dna-click-section { margin-top: 10px; }
+.dna-click-label { font-size: 12px; color: #7cb9ff; }
+
+.dna-legend {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  padding: 14px 16px;
+  background: #f7fbff;
+  border-top: 2px solid var(--border);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--muted); }
+
+.dna-score {
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #27ae60;
+  background: #f7fbff;
+  border-top: 2px solid var(--border);
+  min-height: 44px;
+}
+
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(10,20,40,0.7);
+  display: none; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+  padding: 16px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  width: min(500px, 100%);
+  animation: slideUp .25s ease;
+  overflow: hidden;
+}
+@keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:none;opacity:1} }
+
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px;
+  background: linear-gradient(135deg, #1565c0, #1976d2);
+}
+.modal-header h3 { font-size: 15px; font-weight: 700; color: #fff; }
+.modal-close { background: none; border: none; color: rgba(255,255,255,0.7); font-size: 20px; cursor: pointer; }
+.modal-close:hover { color: #fff; }
+
+.modal-body { padding: 22px; }
+.modal-body label {
+  display: block; font-size: 12px; font-weight: 700;
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 6px; margin-top: 14px;
+}
+.modal-body label:first-child { margin-top: 0; }
+.modal-body input, .modal-body textarea {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: #f7fbff;
+  padding: 10px 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s;
+}
+.modal-body input:focus, .modal-body textarea:focus { border-color: #1976d2; }
+.modal-body textarea { height: 100px; resize: vertical; }
+
+.modal-footer {
+  padding: 14px 22px;
+  border-top: 2px solid var(--border);
+  display: flex; justify-content: flex-end; gap: 10px;
+}
+
+.btn-send {
+  background: linear-gradient(135deg, #1565c0, #1976d2);
+  color: #fff; border: none; border-radius: 8px;
+  padding: 10px 22px; font-family: 'Nunito', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  transition: opacity .15s;
+}
+.btn-send:hover { opacity: 0.9; }
+
+.success-msg {
+  display: none; text-align: center;
+  padding: 28px; font-size: 14px; color: var(--text);
+}
+.success-msg .check { font-size: 40px; margin-bottom: 12px; }
+
+.statusbar {
+  position: fixed; bottom: 0; left: var(--sidebar-w); right: 0;
+  height: 28px;
+  background: #1565c0;
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.85);
+  z-index: 50;
+  overflow: hidden; white-space: nowrap;
+}
+.statusbar .status-item { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #a5f3a0; animation: blink 2s infinite; flex-shrink: 0;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #90c4f0; border-radius: 6px; }
+
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .header-center { display: none; }
+
+  aside {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    height: calc(100vh - var(--header-h));
+    transform: translateX(-100%);
+    z-index: 90;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+  }
+  aside.open { transform: translateX(0); }
+
+  main { padding: 16px 14px 60px; overflow-x: hidden; }
+  .hero { padding: 30px 20px; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .data-panel { grid-template-columns: repeat(2, 1fr); gap: 8px;}
+  
+  .sim-controls { grid-template-columns: 1fr; padding: 12px; }
+  #force-inputs { grid-template-columns: 1fr !important; }
+  
+  .sim-canvas { padding: 10px; min-height: 220px; }
+  canvas { max-width: 100% !important; height: auto !important; }
+  
+  .beaker-wrap { padding: 16px 10px; gap: 8px; }
+  .beaker { width: 55px; height: 100px; }
+  .reaction-arrow, .plus-sign2 { font-size: 18px; padding-bottom: 8px; }
+  .beaker-label { font-size: 10px; top: -20px; }
+  
+  .shelf-selected { justify-content: center; padding: 8px; gap: 8px; }
+  .selected-slot { min-width: 100px; padding: 8px; }
+  
+  .statusbar { left: 0; font-size: 9px; }
+}
+/* Thêm cho phần nồng độ hóa học */
+.concentration-inputs .control-group {
+  flex: 1;
+  min-width: 130px;
+}
+.concentration-inputs input {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+@media (max-width: 420px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .beaker { width: 45px; height: 80px; }
+}
+
+/* ==================== CELL CHIPS (Nút Tế Bào) ==================== */
+#cell-chips {
+  gap: 10px;
+}
+
+.cell-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 2px solid var(--border);
+  border-radius: 30px; /* Bo tròn hoàn toàn tạo dạng pill */
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(60, 100, 180, 0.05);
+  outline: none;
+}
+
+.cell-chip:hover {
+  background: var(--bio-light);
+  border-color: var(--bio);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.15);
+  color: #1e8449;
+}
+
+.cell-chip.active {
+  background: var(--bio);
+  border-color: var(--bio);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(39, 174, 96, 0.35);
+}
+
+/* ==================== BẢNG TUẦN HOÀN 118 NGUYÊN TỐ ==================== */
+
+.periodic-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding: 10px 16px 8px;
+  background: #0d1b2a;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.periodic-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+}
+
+.legend-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.legend-box.alkali-metal { background: linear-gradient(135deg,#ffb3ba,#ff8c94); }
+.legend-box.alkaline-earth { background: linear-gradient(135deg,#ffe0b3,#ffcc80); }
+.legend-box.transition-metal { background: linear-gradient(135deg,#1e3a8a,#1e40af); }
+.legend-box.post-transition { background: linear-gradient(135deg,#065f46,#047857); }
+.legend-box.metalloid { background: linear-gradient(135deg,#374151,#4b5563); }
+.legend-box.nonmetal { background: linear-gradient(135deg,#d1fae5,#a7f3d0); }
+.legend-box.halogen { background: linear-gradient(135deg,#fed7aa,#fdba74); }
+.legend-box.noble-gas { background: linear-gradient(135deg,#4c1d95,#5b21b6); }
+.legend-box.lanthanide { background: linear-gradient(135deg,#831843,#9d174d); }
+.legend-box.actinide { background: linear-gradient(135deg,#7f1a1f,#991b1b); }
+
+.periodic-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 980px;
+  padding: 14px 16px 16px;
+  background: #0d1b2a;
+}
+
+.periodic-row {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(54px, 1fr));
+  gap: 4px;
+}
+
+/* Ô nguyên tố */
+.element-cell {
+  background: #1a1a2a;
+  border-radius: 8px;
+  padding: 6px 2px 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #2c2c3a;
+  min-width: 48px;
+}
+
+.element-cell:not(.empty):hover {
+  transform: scale(1.05);
+  background: #2a2a3a;
+  z-index: 2;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.element-cell.empty {
+  background: transparent !important;
+  border: none !important;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.element-cell.placeholder {
+  background: #2d3748;
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: default;
+}
+
+.element-cell .atomic-num {
+  font-size: 9px;
+  text-align: left;
+  margin-left: 4px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+}
+
+.element-cell .symbol {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 2px 0;
+}
+
+.element-cell .elem-name {
+  font-size: 7px;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 2px;
+}
+
+/* Màu sắc các nhóm - nền sáng chữ đen, nền tối chữ trắng */
+.element-cell.alkali-metal {
+  background: linear-gradient(135deg, #ffb3ba, #ff8c94);
+}
+.element-cell.alkali-metal .symbol,
+.element-cell.alkali-metal .atomic-num,
+.element-cell.alkali-metal .elem-name { color: #000; }
+
+.element-cell.alkaline-earth {
+  background: linear-gradient(135deg, #ffe0b3, #ffcc80);
+}
+.element-cell.alkaline-earth .symbol,
+.element-cell.alkaline-earth .atomic-num,
+.element-cell.alkaline-earth .elem-name { color: #000; }
+
+.element-cell.transition-metal {
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+}
+.element-cell.transition-metal .symbol,
+.element-cell.transition-metal .atomic-num,
+.element-cell.transition-metal .elem-name { color: #fff; }
+
+.element-cell.post-transition {
+  background: linear-gradient(135deg, #065f46, #047857);
+}
+.element-cell.post-transition .symbol,
+.element-cell.post-transition .atomic-num,
+.element-cell.post-transition .elem-name { color: #fff; }
+
+.element-cell.metalloid {
+  background: linear-gradient(135deg, #374151, #4b5563);
+}
+.element-cell.metalloid .symbol,
+.element-cell.metalloid .atomic-num,
+.element-cell.metalloid .elem-name { color: #fff; }
+
+.element-cell.nonmetal {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+.element-cell.nonmetal .symbol,
+.element-cell.nonmetal .atomic-num,
+.element-cell.nonmetal .elem-name { color: #000; }
+
+.element-cell.halogen {
+  background: linear-gradient(135deg, #fed7aa, #fdba74);
+}
+.element-cell.halogen .symbol,
+.element-cell.halogen .atomic-num,
+.element-cell.halogen .elem-name { color: #000; }
+
+.element-cell.noble-gas {
+  background: linear-gradient(135deg, #4c1d95, #5b21b6);
+}
+.element-cell.noble-gas .symbol,
+.element-cell.noble-gas .atomic-num,
+.element-cell.noble-gas .elem-name { color: #fff; }
+
+.element-cell.lanthanide {
+  background: linear-gradient(135deg, #831843, #9d174d);
+}
+.element-cell.lanthanide .symbol,
+.element-cell.lanthanide .atomic-num,
+.element-cell.lanthanide .elem-name { color: #fff; }
+
+.element-cell.actinide {
+  background: linear-gradient(135deg, #7f1a1f, #991b1b);
+}
+.element-cell.actinide .symbol,
+.element-cell.actinide .atomic-num,
+.element-cell.actinide .elem-name { color: #fff; }
+
+/* Panel chi tiết nguyên tố */
+.element-detail {
+  margin: 0;
+  padding: 18px 22px;
+  background: #1a2640;
+  border-radius: 0 0 var(--radius) var(--radius);
+  color: #fff;
+  border-top: 3px solid #27ae60;
+  display: none;
+}
+
+.detail-placeholder {
+  color: #7cb9ff;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px;
+}
+
+.element-detail .detail-symbol {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffd966;
+  margin-right: 12px;
+}
+
+.element-detail .detail-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.element-detail .detail-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px 16px;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.element-detail .detail-body strong {
+  color: #90ee90;
+}
+
+.element-detail code {
+  background: #0d1b2a;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: #fbbf24;
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .periodic-row {
+    grid-template-columns: repeat(18, minmax(40px, 1fr));
+    gap: 2px;
+  }
+  .element-cell .symbol {
+    font-size: 11px;
+  }
+  .element-cell .elem-name {
+    display: none;
+  }
+  .element-cell .atomic-num {
+    font-size: 7px;
+  }
+  .element-detail .detail-body {
+    grid-template-columns: 1fr;
+  }
+}
+/* ==================== BỔ SUNG GIAO DIỆN MỚI ==================== */
+
+/* Periodic Table Container */
+.periodic-container {
+  background: #0d1b2a;
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow-x: auto;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--border);
+  border-top: none;
+}
+
+/* F-block label */
+.fblock-label {
+  color: #ffd966;
+  font-weight: 800;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px 0 2px;
+  letter-spacing: .06em;
+}
+
+/* Selected element highlight */
+.element-cell.selected-cell {
+  outline: 3px solid #ffd966 !important;
+  outline-offset: 1px;
+  z-index: 5;
+  transform: scale(1.08) !important;
+  box-shadow: 0 0 16px rgba(255,217,102,0.7) !important;
+}
+
+/* Detail panel symbol with color */
+.element-detail .detail-symbol {
+  font-size: 36px;
+  font-weight: 900;
+  padding: 8px 14px;
+  border-radius: 10px;
+  display: inline-block;
+  min-width: 52px;
+  text-align: center;
+  color: #fff;
+}
+.element-detail .detail-symbol.alkali-metal { background: linear-gradient(135deg,#ffb3ba,#ff8c94); color:#000; }
+.element-detail .detail-symbol.alkaline-earth { background: linear-gradient(135deg,#ffe0b3,#ffcc80); color:#000; }
+.element-detail .detail-symbol.transition-metal { background: linear-gradient(135deg,#1e3a8a,#1e40af); }
+.element-detail .detail-symbol.post-transition { background: linear-gradient(135deg,#065f46,#047857); }
+.element-detail .detail-symbol.metalloid { background: linear-gradient(135deg,#374151,#4b5563); }
+.element-detail .detail-symbol.nonmetal { background: linear-gradient(135deg,#d1fae5,#a7f3d0); color:#000; }
+.element-detail .detail-symbol.halogen { background: linear-gradient(135deg,#fed7aa,#fdba74); color:#000; }
+.element-detail .detail-symbol.noble-gas { background: linear-gradient(135deg,#4c1d95,#5b21b6); }
+.element-detail .detail-symbol.lanthanide { background: linear-gradient(135deg,#831843,#9d174d); }
+.element-detail .detail-symbol.actinide { background: linear-gradient(135deg,#7f1a1f,#991b1b); }
+
+/* Nút Tabs cho Động năng - Thế năng */
+.energy-tab {
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.energy-tab:hover {
+  background: rgba(25, 118, 210, 0.05);
+}
+
+/* Các khe DNA kéo thả (Lắp ráp DNA) */
+.dna-base-slot {
+  width: 40px; height: 36px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+  transition: all .15s;
+  border: 2px dashed rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #aaa;
+}
+.dna-base-slot.filled {
+  border-style: solid;
+  color: #fff;
+}
+.dna-base-slot:hover { background: rgba(255,255,255,0.12); }
+.dna-base-slot.correct { box-shadow: 0 0 12px rgba(46,204,113,0.8); border-color: #2ecc71; }
+.dna-base-slot.wrong { box-shadow: 0 0 12px rgba(231,76,60,0.8); border-color: #e74c3c; }
+
+/* Kế thừa màu base cho DNA */
+.base-A { background: #e74c3c; color: #fff; border-color: #c0392b !important;}
+.base-T { background: #3498db; color: #fff; border-color: #2980b9 !important;}
+.base-G { background: #2ecc71; color: #fff; border-color: #27ae60 !important;}
+.base-C { background: #f39c12; color: #fff; border-color: #d35400 !important;}
+
+/* Fix hiển thị bảng cấu tạo Tế bào */
+#organelle-info-panel {
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.element-cell.post-transition {
+  background: linear-gradient(135deg, #065f46, #047857);
+}
+.element-cell.post-transition .symbol,
+.element-cell.post-transition .atomic-num,
+.element-cell.post-transition .elem-name { color: #fff; }
+.periodic-cell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  z-index: 10;
+}
+
+/* ==================== ĐỘNG NĂNG – THẾ NĂNG (IMPROVED UI) ==================== */
+
+.energy-tab-bar {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+  background: #1a2640;
+  border-radius: 0;
+  overflow: hidden;
+  border-bottom: 3px solid #0d1b2a;
+}
+
+.energy-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 14px 20px;
+  border: none;
+  background: #1e3050;
+  color: rgba(255,255,255,0.55);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-bottom: 3px solid transparent;
+  position: relative;
+}
+.energy-tab:hover {
+  background: #22395e;
+  color: rgba(255,255,255,0.85);
+}
+.energy-tab.active {
+  background: linear-gradient(180deg, #1565c0 0%, #1976d2 100%);
+  color: #ffffff;
+  border-bottom: 3px solid #42a5f5;
+  box-shadow: 0 4px 16px rgba(21,101,192,0.35);
+}
+
+.etab-icon  { font-size: 22px; line-height: 1; }
+.etab-text  { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; }
+.etab-formula {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  opacity: 0.75;
+  margin-top: 1px;
+}
+
+/* Formula display – thay thế div inline style */
+.energy-formula-display {
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #e8f4ff 0%, #ddeeff 100%);
+  border-top: 2px solid #b3d4f7;
+  border-bottom: 2px solid #b3d4f7;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  color: #0d47a1;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.energy-formula-display::before {
+  content: '📐';
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.energy-formula-display b {
+  color: #1565c0;
+  font-size: 16px;
+  padding: 0 4px;
+  background: rgba(21,101,192,0.08);
+  border-radius: 4px;
+}
+
+/* ==================== GIAO THOA YOUNG (IMPROVED UI) ==================== */
+
+.young-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 0;
+  background: #f7fbff;
+  border-top: 2px solid var(--border);
+}
+
+.young-param-card {
+  padding: 14px 16px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.young-param-card:last-child { border-right: none; }
+
+.young-param-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.young-param-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.young-param-row input[type="number"] {
+  padding: 6px 10px;
+  border: 2px solid var(--border);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  outline: none;
+  transition: border-color .15s;
+}
+.young-param-row input[type="number"]:focus { border-color: #1976d2; }
+
+.young-param-unit {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.young-color-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+/* Slider */
+.young-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+  margin-top: 2px;
+}
+.young-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #1976d2;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(21,101,192,0.4);
+}
+.young-slider::-moz-range-thumb {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #1976d2;
+  cursor: pointer;
+  border: none;
+}
+
+/* Result banner */
+.young-result-banner {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.young-result-item {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--border);
+  border-top: 3px solid var(--physics);
+}
+
+.young-result-wide {
+  grid-column: span 2;
+}
+
+.yr-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 5px;
+}
+
+.yr-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--physics);
+  word-break: break-all;
+}
+
+@media (max-width: 600px) {
+  .young-controls-grid { grid-template-columns: 1fr 1fr; }
+  .young-result-wide { grid-column: span 1; }
+  .young-result-banner { grid-template-columns: 1fr 1fr; }
+}
+
+/* ==================== CẤU TẠO TẾ BÀO – chip glow khi active ==================== */
+.cell-chip.active {
+  background: var(--bio);
+  border-color: var(--bio);
+  color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(39,174,96,0.35), 0 4px 14px rgba(39,174,96,0.4);
+  animation: chipPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes chipPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(39,174,96,0.35), 0 4px 14px rgba(39,174,96,0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(39,174,96,0.2),  0 6px 20px rgba(39,174,96,0.55); }
+}

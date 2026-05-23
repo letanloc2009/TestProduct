@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THPT Vĩnh Xuân - ONLINE EXPERIMENT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-brand">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="brand-logo">🔬</div>
+    <div class="brand-text">THPT VĨNH XUÂN</div>
+  </div>
+  <div class="header-center">ONLINE EXPERIMENT</div>
+  <div class="header-actions">
+    <button class="btn-mail" id="openModal" title="Gửi phản hồi">✉</button>
+  </div>
+</header>
+
+<!-- Sidebar overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="nav-home" onclick="showPage('home')">🏠 TRANG CHỦ</div>
+
+    <!-- VẬT LÍ -->
+    <div class="subject-group">
+      <div class="subject-toggle physics-color" onclick="toggleSubject(this)">
+        <span class="subj-icon">⚡</span> VẬT LÍ
+        <span class="arrow">›</span>
+      </div>
+      <div class="subject-items">
+        <div class="nav-item" onclick="showPage('motion')">🚗 Chuyển động</div>
+        <div class="nav-item" onclick="showPage('force')">💪 Lực</div>
+        <div class="nav-item" onclick="showPage('wave')">〰 Sóng cơ</div>
+        <div class="nav-item" onclick="showPage('circuit')">⚙ Mạch điện</div>
+		<div class="nav-item" onclick="showPage('young')">🌈 Giao thoa Young</div>
+		<div class="nav-item" onclick="showPage('energy')">⚡ Động năng – Thế năng</div>
+		<div class="nav-item" onclick="showPage('torque')">🔄 Moment lực</div>
+      </div>
+    </div>
+
+    <!-- HÓA HỌC -->
+    <div class="subject-group">
+      <div class="subject-toggle chem-color" onclick="toggleSubject(this)">
+        <span class="subj-icon">⚗</span> HÓA HỌC
+        <span class="arrow">›</span>
+      </div>
+      <div class="subject-items">
+        <div class="nav-item" onclick="showPage('acidbase')">🧪 Phản ứng hóa học</div>
+        <div class="nav-item" onclick="showPage('periodic')">📊 Bảng tuần hoàn</div>
+      </div>
+    </div>
+
+    <!-- SINH HỌC -->
+    <div class="subject-group">
+      <div class="subject-toggle bio-color" onclick="toggleSubject(this)">
+        <span class="subj-icon">🌿</span> SINH HỌC
+        <span class="arrow">›</span>
+      </div>
+      <div class="subject-items">
+        <div class="nav-item" onclick="showPage('dna')">🧬 Lắp ráp DNA</div>
+        <div class="nav-item" onclick="showPage('cell')">🔬 Cấu tạo tế bào</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-badge">🔬 YOUR LABORATORY</div>
+        <h1 class="hero-title">KHÁM PHÁ<br><span>KHOA HỌC</span></h1>
+        <p class="hero-sub">Mô phỏng các thí nghiệm Vật lí, Hóa học và Sinh học</p>
+      </div>
+
+      <h2 class="section-title">⚡ Vật Lí</h2>
+      <div class="cards-grid">
+        <div class="card physics-card" onclick="showPage('motion')">
+          <div class="card-icon">🚗</div>
+          <h3>Chuyển Động</h3>
+          <p>Mô phỏng chuyển động thẳng đều và biến đổi đều</p>
+        </div>
+        <div class="card physics-card" onclick="showPage('force')">
+          <div class="card-icon">💪</div>
+          <h3>Lực</h3>
+          <p>Tương tác lực và cân bằng lực</p>
+        </div>
+        <div class="card physics-card" onclick="showPage('wave')">
+          <div class="card-icon">〰</div>
+          <h3>Sóng Cơ</h3>
+          <p>Quan sát sóng ngang, sóng dọc và cộng hưởng</p>
+        </div>
+        <div class="card physics-card" onclick="showPage('circuit')">
+          <div class="card-icon">⚙</div>
+          <h3>Mạch Điện</h3>
+          <p>Lắp mạch với ampe kế, vôn kế, điện trở, đèn</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">⚗ Hóa Học</h2>
+      <div class="cards-grid">
+        <div class="card chem-card" onclick="showPage('acidbase')">
+          <div class="card-icon">🧪</div>
+          <h3>Phản ứng hóa học</h3>
+          <p>Kệ hóa chất, giấy quỳ tím, phản ứng hóa học</p>
+        </div>
+        <div class="card chem-card" onclick="showPage('periodic')">
+          <div class="card-icon">📊</div>
+          <h3>Bảng tuần hoàn</h3>
+          <p>Tra cứu 118 nguyên tố hóa học</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">🌿 Sinh Học</h2>
+      <div class="cards-grid">
+        <div class="card bio-card" onclick="showPage('dna')">
+          <div class="card-icon">🧬</div>
+          <h3>Lắp Ráp DNA</h3>
+          <p>Ghép cặp base nitơ và xây dựng chuỗi DNA</p>
+        </div>
+        <div class="card bio-card" onclick="showPage('cell')">
+          <div class="card-icon">🔬</div>
+          <h3>Cấu Tạo Tế Bào</h3>
+          <p>Khám phá cấu trúc tế bào nhân thực và nhân sơ</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== VẬT LÍ: CHUYỂN ĐỘNG ==================== -->
+    <div class="page" id="page-motion">
+      <div class="page-header physics-header">
+        <span class="page-badge physics-badge">⚡ Vật Lí</span>
+        <h2>Chuyển Động Thẳng</h2>
+      </div>
+      <div class="sim-container">
+        <div class="sim-toolbar">
+          <span class="sim-title">// CHUYỂN ĐỘNG THẲNG</span>
+          <button class="btn btn-physics" id="motion-btn" onclick="toggleMotion()">▶ CHẠY</button>
+          <button class="btn btn-secondary" onclick="resetMotion()">↺ LÀM MỚI</button>
+        </div>
+        <div class="sim-canvas" style="flex-direction:column;gap:0;padding:0;min-height:300px">
+          <canvas id="motion-canvas" width="700" height="200" style="display:block;max-width:100%"></canvas>
+          <canvas id="graph-canvas" width="700" height="120" style="display:block;max-width:100%;border-top:2px solid #e8f4fd"></canvas>
+        </div>
+        <div class="sim-controls">
+          <div class="control-group">
+            <label>Tính</label>
+            <select id="calc-target" onchange="updateInputFields()">
+              <option value="s">s (quãng đường)</option>
+              <option value="v">v (vận tốc)</option>
+              <option value="t">t (thời gian)</option>
+            </select>
+          </div>
+          <div class="control-group" id="v0-group">
+            <label>v₀ (m/s)</label>
+            <input type="number" value="10" step="1" id="v0-input">
+          </div>
+          <div class="control-group" id="a-group">
+            <label>a (m/s²)</label>
+            <input type="number" value="1" step="0.5" id="a-input">
+          </div>
+          <div class="control-group" id="t-group">
+            <label>t (s)</label>
+            <input type="number" value="5" step="1" id="t-input">
+          </div>
+          <div class="control-group" id="v-group" style="display:none">
+            <label>v (m/s)</label>
+            <input type="number" value="20" step="1" id="v-input">
+          </div>
+          <div class="control-group" id="s-group" style="display:none">
+            <label>s (m)</label>
+            <input type="number" value="50" step="10" id="s-input">
+          </div>
+          <div class="control-group" style="grid-column:1/-1">
+            <button class="btn btn-physics" onclick="calcAndRun()" style="width:100%;padding:12px">= Tính & Mô phỏng</button>
+          </div>
+        </div>
+      </div>
+      <div class="data-panel">
+        <div class="data-cell"><div class="dc-label">t</div><div class="dc-val" id="m-time">0.00<span class="dc-unit">s</span></div></div>
+        <div class="data-cell"><div class="dc-label">v</div><div class="dc-val" id="m-vel">00.00<span class="dc-unit">m/s</span></div></div>
+        <div class="data-cell"><div class="dc-label">s</div><div class="dc-val" id="m-dist">0.00<span class="dc-unit">m</span></div></div>
+        <div class="data-cell"><div class="dc-label">a</div><div class="dc-val" id="m-acc">0.00<span class="dc-unit">m/s²</span></div></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Công thức</h4>
+          <ul>
+            <li>v = v₀ + a·t</li>
+            <li>s = v₀·t + ½·a·t²</li>
+            <li>v² = v₀² + 2·a·s</li>
+            <li>s = ½·(v₀ + v)·t</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Nhận xét</h4>
+          <ul>
+            <li>a = 0: chuyển động thẳng đều</li>
+            <li>a &gt; 0: nhanh dần đều</li>
+            <li>a &lt; 0: chậm dần đều</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== VẬT LÍ: LỰC ==================== -->
+    <div class="page" id="page-force">
+      <div class="page-header physics-header">
+        <span class="page-badge physics-badge">⚡ Vật Lí</span>
+        <h2>Lực – Đẩy &amp; Kéo Thùng Hàng</h2>
+      </div>
+      <div class="sim-container">
+        <div class="sim-toolbar">
+          <span class="sim-title">// LỰC TỔNG HỢP – THÙNG HÀNG</span>
+          <button class="btn btn-physics" id="force-btn" onclick="toggleForce()">▶ CHẠY</button>
+          <button class="btn btn-secondary" onclick="resetForce()">↺ LÀM MỚI</button>
+        </div>
+
+        <!-- Palette kéo nhân vật -->
+        <div class="force-palette">
+          <span class="force-palette-label">🖱 Kéo nhân vật vào vùng trái / phải để xác định lực:</span>
+          <div draggable="true" class="force-chip pull-chip" ondragstart="fDragStart(event,'pull')" title="Người kéo thùng về phía mình">🏃 Người kéo</div>
+          <div draggable="true" class="force-chip push-chip" ondragstart="fDragStart(event,'push')" title="Người đẩy thùng ra xa">💪 Người đẩy</div>
+          <button class="btn btn-secondary" style="padding:5px 12px;font-size:12px;" onclick="clearAllForceZones()">✕ Xóa hết</button>
+        </div>
+
+        <!-- Drop zones -->
+        <div class="force-zones-row">
+          <div class="force-zone" id="force-zone-left"
+               ondragover="event.preventDefault(); this.classList.add('drag-over')"
+               ondragleave="this.classList.remove('drag-over')"
+               ondrop="fDrop(event,'left')"
+               onclick="clearForceZone('left')">
+            <div id="fz-left-icon" style="font-size:22px;">❓</div>
+            <span id="fz-left-label">Thả nhân vật<br>vào đây</span>
+            <div style="font-size:10px;color:#aaa;margin-top:4px;">(click để xóa)</div>
+          </div>
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;">
+              <div style="font-size:28px;">📦</div>
+              <div style="font-size:10px;color:#7cb9ff;font-weight:700;margin-top:4px;">THÙNG<br>HÀNG</div>
+            </div>
+          </div>
+          <div class="force-zone right-zone" id="force-zone-right"
+               ondragover="event.preventDefault(); this.classList.add('drag-over')"
+               ondragleave="this.classList.remove('drag-over')"
+               ondrop="fDrop(event,'right')"
+               onclick="clearForceZone('right')">
+            <div id="fz-right-icon" style="font-size:22px;">❓</div>
+            <span id="fz-right-label">Thả nhân vật<br>vào đây</span>
+            <div style="font-size:10px;color:#aaa;margin-top:4px;">(click để xóa)</div>
+          </div>
+        </div>
+
+        <div class="sim-canvas" style="padding:0;background:#0d1b2a">
+          <canvas id="force-canvas" width="700" height="280" style="display:block;max-width:100%;width:100%"></canvas>
+        </div>
+        <div class="sim-controls" id="force-inputs" style="grid-template-columns:repeat(2,1fr)">
+          <div class="control-group">
+            <label>Lực Trái F₁ (N)</label>
+            <input type="number" id="force-left" value="100" step="10" min="0" max="10000" oninput="updateForceDisplay()">
+            <span class="val" id="fl-val">100 N</span>
+          </div>
+          <div class="control-group">
+            <label>Lực Phải F₂ (N)</label>
+            <input type="number" id="force-right" value="100" step="10" min="0" max="10000" oninput="updateForceDisplay()">
+            <span class="val" id="fr-val">100 N</span>
+          </div>
+        </div>
+      </div>
+      <div class="data-panel">
+        <div class="data-cell"><div class="dc-label">F₁ (trái)</div><div class="dc-val" id="fp-f1">100<span class="dc-unit">N</span></div></div>
+        <div class="data-cell"><div class="dc-label">F₂ (phải)</div><div class="dc-val" id="fp-f2">100<span class="dc-unit">N</span></div></div>
+        <div class="data-cell"><div class="dc-label">Hợp Lực</div><div class="dc-val" id="fp-net">0<span class="dc-unit">N</span></div></div>
+        <div class="data-cell"><div class="dc-label">Kết quả</div><div class="dc-val" id="fp-result" style="font-size:13px">— Chọn nhân vật —</div></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Định luật Newton II</h4>
+          <ul>
+            <li>F = m·a → vật chuyển động theo hợp lực</li>
+            <li>Người kéo → kéo thùng về phía mình</li>
+            <li>Người đẩy → đẩy thùng ra xa mình</li>
+            <li>F_net = 0 → thùng đứng yên (cân bằng)</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Các trường hợp thú vị</h4>
+          <ul>
+            <li>Cả 2 đều kéo → lực ngược chiều → triệt tiêu nếu bằng nhau</li>
+            <li>Cả 2 đều đẩy → lực ngược chiều → triệt tiêu nếu bằng nhau</li>
+            <li>Trái kéo + Phải đẩy → cùng chiều → hợp lực sang trái</li>
+            <li>Trái đẩy + Phải kéo → cùng chiều → hợp lực sang phải</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== VẬT LÍ: SÓNG CƠ ==================== -->
+    <div class="page" id="page-wave">
+      <div class="page-header physics-header">
+        <span class="page-badge physics-badge">⚡ Vật Lí</span>
+        <h2>Sóng Cơ Học</h2>
+      </div>
+      <div class="sim-container">
+        <div class="sim-toolbar">
+          <span class="sim-title">// SÓNG CƠ HỌC</span>
+          <button class="btn btn-physics" id="wave-btn" onclick="toggleWave()">▶ CHẠY</button>
+          <button class="btn btn-secondary" onclick="resetWave()">↺ LÀM MỚI</button>
+        </div>
+        <div class="sim-canvas" style="padding:0;background:#0d1b2a;flex-direction:column">
+          <canvas id="wave-canvas" width="700" height="300" style="display:block;max-width:100%;width:100%"></canvas>
+        </div>
+        <div class="sim-controls">
+          <div class="control-group">
+            <label>Loại sóng</label>
+            <select id="wave-type" onchange="resetWave()">
+              <option value="transverse">Sóng ngang</option>
+              <option value="longitudinal">Sóng dọc</option>
+              <option value="standing">Sóng dừng</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label>Biên độ A (px)</label>
+            <input type="number" id="wave-amp" value="30" step="5" min="0" max="200" oninput="updateWaveAmpNumber(); resetWave()">
+            <span class="val">px</span>
+          </div>
+          <div class="control-group">
+            <label>Tần số f (Hz)</label>
+            <input type="number" id="wave-freq" value="2" step="0.5" min="0.1" max="20" oninput="updateWaveFreqNumber(); resetWave()">
+            <span class="val">Hz</span>
+          </div>
+          <div class="control-group">
+            <label>Tốc độ (cm/s)</label>
+            <input type="number" id="wave-speed" value="3" step="0.5" min="0.5" max="50" oninput="updateWaveSpeedNumber(); resetWave()">
+            <span class="val">cm/s</span>
+          </div>
+        </div>
+      </div>
+      <div class="data-panel">
+        <div class="data-cell"><div class="dc-label">Biên độ A</div><div class="dc-val" id="wave-A-display">30<span class="dc-unit">px</span></div></div>
+        <div class="data-cell"><div class="dc-label">Tần số f</div><div class="dc-val" id="wave-f-display">2<span class="dc-unit">Hz</span></div></div>
+        <div class="data-cell"><div class="dc-label">Chu kỳ T</div><div class="dc-val" id="wave-T-display">0.5<span class="dc-unit">s</span></div></div>
+        <div class="data-cell"><div class="dc-label">Bước sóng λ</div><div class="dc-val" id="wave-L-display">–<span class="dc-unit">cm</span></div></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Công thức sóng cơ</h4>
+          <ul>
+            <li>T = 1/f (chu kỳ)</li>
+            <li>λ = v/f (bước sóng)</li>
+            <li>y = A·sin(2πft – 2πx/λ)</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Loại sóng cơ</h4>
+          <ul>
+            <li>Sóng ngang: dao động ⊥ truyền sóng</li>
+            <li>Sóng dọc: dao động // truyền sóng</li>
+            <li>Sóng dừng: giao thoa hai sóng ngược chiều</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== VẬT LÍ: SÓNG ÁNH SÁNG ==================== -->
+    <div class="page" id="page-optics">
+      <div class="page-header physics-header">
+        <span class="page-badge physics-badge">⚡ Vật Lí</span>
+        <h2>Sóng Ánh Sáng</h2>
+      </div>
+      <div class="sim-container">
+        <div class="sim-toolbar">
+          <span class="sim-title">// QUANG HỌC – ÁNH SÁNG</span>
+          <!-- Đã bỏ hai nút CHẠY và LÀM MỚI -->
+        </div>
+        <div class="sim-canvas" style="padding:0;background:#030712;flex-direction:column">
+          <canvas id="optics-canvas" width="700" height="320" style="display:block;max-width:100%;width:100%"></canvas>
+        </div>
+        <div class="sim-controls">
+          <div class="control-group">
+            <label>Hiện tượng</label>
+            <select id="optics-mode" onchange="runOptics()">
+				<option value="dispersion">Tán sắc ánh sáng (lăng kính)</option>
+				<option value="refraction">Khúc xạ ánh sáng</option>
+			</select>
+          </div>
+          <div class="control-group">
+            <label>Góc tới (°)</label>
+            <input type="number" id="optics-angle" value="40" step="1" min="0" max="89" oninput="runOptics(); document.getElementById('optics-angle-val').textContent=this.value+'°'">
+            <span class="val" id="optics-angle-val">40°</span>
+          </div>
+          <div class="control-group">
+            <label>Chiết suất n₂</label>
+            <input type="number" id="optics-n" value="1.5" step="0.01" min="1.0" max="5.0" oninput="runOptics(); document.getElementById('optics-n-val').textContent=parseFloat(this.value).toFixed(2)">
+            <span class="val" id="optics-n-val">1.50</span>
+          </div>
+        </div>
+      </div>
+      <div class="data-panel">
+        <div class="data-cell"><div class="dc-label">Góc tới i</div><div class="dc-val" id="opt-i">40<span class="dc-unit">°</span></div></div>
+        <div class="data-cell"><div class="dc-label">Góc khúc xạ r</div><div class="dc-val" id="opt-r">–<span class="dc-unit">°</span></div></div>
+        <div class="data-cell"><div class="dc-label">n₂/n₁</div><div class="dc-val" id="opt-n">1.50</div></div>
+        <div class="data-cell"><div class="dc-label">Hiện tượng</div><div class="dc-val" id="opt-desc" style="font-size:12px">Tán sắc</div></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Định luật Snell</h4>
+          <ul>
+            <li>n₁·sin(i) = n₂·sin(r)</li>
+            <li>n₁ < n₂: ánh sáng lệch về pháp tuyến</li>
+            <li>n_không khí ≈ 1.0</li>
+            <li>n_kính ≈ 1.5; n_nước ≈ 1.33</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Tán sắc & Giao thoa</h4>
+          <ul>
+            <li>Lăng kính tách trắng → 7 màu quang phổ</li>
+            <li>Giao thoa: vân sáng khi δ = kλ</li>
+            <li>Vân tối khi δ = (k+½)λ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+	<!-- GIAO THOA YOUNG -->
+<div class="page" id="page-young">
+  <div class="page-header physics-header">
+    <span class="page-badge physics-badge">⚡ Vật Lí</span>
+    <h2>Giao thoa ánh sáng – Thí nghiệm Young</h2>
+  </div>
+  <div class="sim-container">
+    <div class="sim-toolbar">
+      <span class="sim-title">// THÍ NGHIỆM KHE YOUNG</span>
+      <button class="btn btn-physics" onclick="runYoung()">✨ Cập nhật</button>
+      <button class="btn btn-secondary" onclick="resetYoung()">↺ Mặc định</button>
+    </div>
+    <div class="sim-canvas" style="padding:0; background:#030712; min-height:320px;">
+      <canvas id="young-canvas" width="700" height="320" style="display:block;max-width:100%;width:100%;"></canvas>
+    </div>
+
+    <!-- Controls dạng 2 cột gọn gàng -->
+    <div class="young-controls-grid">
+      <div class="young-param-card">
+        <div class="young-param-label">Bước sóng λ</div>
+        <div class="young-param-row">
+          <input type="number" id="lambda" value="600" step="10" min="380" max="780"
+            style="width:90px;" oninput="runYoung()">
+          <span class="young-param-unit">nm</span>
+          <span class="young-color-dot" id="lambda-color-dot"></span>
+          <span id="lambda-color-label" style="font-size:11px;font-weight:700;color:#f90">Cam-đỏ</span>
+        </div>
+        <input type="range" id="lambda-range" min="380" max="780" value="600" step="5"
+          class="young-slider" oninput="document.getElementById('lambda').value=this.value; runYoung();">
+      </div>
+
+      <div class="young-param-card">
+        <div class="young-param-label">Khoảng cách khe <i>a</i></div>
+        <div class="young-param-row">
+          <input type="number" id="a-slit" value="0.5" step="0.05" min="0.1" max="2"
+            style="width:90px;" oninput="runYoung()">
+          <span class="young-param-unit">mm</span>
+        </div>
+        <input type="range" id="a-range" min="0.1" max="2" value="0.5" step="0.05"
+          class="young-slider" oninput="document.getElementById('a-slit').value=this.value; runYoung();">
+      </div>
+
+      <div class="young-param-card">
+        <div class="young-param-label">Khoảng cách màn <i>D</i></div>
+        <div class="young-param-row">
+          <input type="number" id="D-screen" value="1.5" step="0.1" min="0.5" max="5"
+            style="width:90px;" oninput="runYoung()">
+          <span class="young-param-unit">m</span>
+        </div>
+        <input type="range" id="D-range" min="0.5" max="5" value="1.5" step="0.1"
+          class="young-slider" oninput="document.getElementById('D-screen').value=this.value; runYoung();">
+      </div>
+
+      <div class="young-param-card">
+        <div class="young-param-label">Số vân hiển thị</div>
+        <div class="young-param-row">
+          <input type="number" id="young-orders" value="7" step="1" min="3" max="15"
+            style="width:90px;" oninput="runYoung()">
+          <span class="young-param-unit">vân</span>
+        </div>
+        <input type="range" id="orders-range" min="3" max="15" value="7" step="1"
+          class="young-slider" oninput="document.getElementById('young-orders').value=this.value; runYoung();">
+      </div>
+    </div>
+  </div>
+
+  <!-- Kết quả tính toán nổi bật -->
+  <div class="young-result-banner">
+    <div class="young-result-item">
+      <div class="yr-label">Khoảng vân <i>i</i></div>
+      <div class="yr-value" id="i-val">–<span class="dc-unit">mm</span></div>
+    </div>
+    <div class="young-result-item">
+      <div class="yr-label">Bước sóng λ</div>
+      <div class="yr-value" id="lambda-val-display">600<span class="dc-unit">nm</span></div>
+    </div>
+    <div class="young-result-item young-result-wide">
+      <div class="yr-label">Công thức &nbsp; <i>i = λD / a</i></div>
+      <div class="yr-value" style="font-size:13px;" id="young-calc-display">–</div>
+    </div>
+    <div class="young-result-item">
+      <div class="yr-label">Màu ánh sáng</div>
+      <div class="yr-value" id="young-desc" style="font-size:14px;">Cam-đỏ</div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-block"><h4>Công thức Young</h4><ul>
+      <li>i = λD / a</li>
+      <li>Vân sáng: x<sub>k</sub> = k·i (k = 0, ±1, ±2...)</li>
+      <li>Vân tối: x<sub>k</sub> = (k + ½)·i</li>
+      <li>λ: bước sóng (m), D: khoảng cách màn (m), a: khoảng cách 2 khe (m)</li>
+    </ul></div>
+    <div class="info-block"><h4>Màu sắc ánh sáng</h4><ul>
+      <li>Tím: 380–450 nm</li>
+      <li>Xanh lam: 450–495 nm</li>
+      <li>Xanh lục: 495–570 nm</li>
+      <li>Vàng–Cam–Đỏ: 570–780 nm</li>
+    </ul></div>
+  </div>
+</div>
+	<!-- ĐỘNG NĂNG – THẾ NĂNG -->
+<div class="page" id="page-energy">
+  <div class="page-header physics-header">
+    <span class="page-badge physics-badge">⚡ Vật Lí</span>
+    <h2>Động năng – Thế năng</h2>
+  </div>
+
+  <!-- Tab selector -->
+  <div class="energy-tab-bar">
+    <button class="energy-tab active" id="tab-ke" onclick="switchEnergyTab('ke')">
+      <span class="etab-icon">🏃</span>
+      <span class="etab-text">Động năng</span>
+      <span class="etab-formula">W<sub>đ</sub> = ½mv²</span>
+    </button>
+    <button class="energy-tab" id="tab-pe" onclick="switchEnergyTab('pe')">
+      <span class="etab-icon">🤸</span>
+      <span class="etab-text">Thế năng</span>
+      <span class="etab-formula">W<sub>t</sub> = mgh</span>
+    </button>
+  </div>
+
+  <!-- ĐỘNG NĂNG PANEL -->
+  <div id="panel-ke">
+    <div class="sim-container">
+      <div class="sim-toolbar">
+        <span class="sim-title">// ĐỘNG NĂNG – NGƯỜI ĐANG CHẠY</span>
+        <button class="btn btn-physics" onclick="toggleKE()" id="ke-btn">▶ Chạy</button>
+        <button class="btn btn-secondary" onclick="resetKE()">↺ Làm mới</button>
+      </div>
+      <div class="sim-canvas" style="padding:0; min-height:240px;">
+        <canvas id="ke-canvas" width="700" height="220" style="display:block;max-width:100%;background:#c8f0e8"></canvas>
+      </div>
+      <div class="sim-controls" style="grid-template-columns:repeat(2,1fr)">
+        <div class="control-group"><label>Khối lượng m (kg)</label><input type="number" id="ke-mass" value="60" step="5" min="10" max="200" oninput="calcKE()"></div>
+        <div class="control-group"><label>Vận tốc v (m/s)</label><input type="number" id="ke-velocity" value="5" step="0.5" min="0.5" max="20" oninput="calcKE()"></div>
+      </div>
+    </div>
+    <div class="data-panel">
+      <div class="data-cell"><div class="dc-label">Khối lượng m</div><div class="dc-val" id="ke-m-val">60<span class="dc-unit">kg</span></div></div>
+      <div class="data-cell"><div class="dc-label">Vận tốc v</div><div class="dc-val" id="ke-v-val">5.0<span class="dc-unit">m/s</span></div></div>
+      <div class="data-cell"><div class="dc-label">Động năng Wđ</div><div class="dc-val" id="ke-result-val">750.0<span class="dc-unit">J</span></div></div>
+      <div class="data-cell"><div class="dc-label">Công thức</div><div class="dc-val" style="font-size:13px;">Wđ = ½mv²</div></div>
+    </div>
+    <div class="energy-formula-display" id="ke-formula-display">
+      Wđ = ½ × 60 × 5² = <b>750.0 J</b>
+    </div>
+    <div class="info-grid">
+      <div class="info-block"><h4>Động năng</h4><ul><li>Wđ = ½mv² (J)</li><li>m: khối lượng (kg), v: vận tốc (m/s)</li><li>Vận tốc tăng 2 lần → Wđ tăng 4 lần</li><li>Wđ ≥ 0, bằng 0 khi vật đứng yên</li></ul></div>
+      <div class="info-block"><h4>Ứng dụng</h4><ul><li>Người chạy nhanh → động năng lớn hơn</li><li>Xe ô tô nặng + tốc độ cao → rất nguy hiểm</li><li>Động năng chuyển hóa thành nhiệt khi phanh</li><li>Bảo toàn cơ năng: Wđ + Wt = const</li></ul></div>
+    </div>
+  </div>
+
+  <!-- THẾ NĂNG PANEL -->
+  <div id="panel-pe" style="display:none">
+    <div class="sim-container">
+      <div class="sim-toolbar">
+        <span class="sim-title">// THẾ NĂNG – NGƯỜI NHẢY XUỐNG HỒ BƠI</span>
+        <button class="btn btn-physics" onclick="togglePE()" id="pe-btn">▶ Nhảy!</button>
+        <button class="btn btn-secondary" onclick="resetPE()">↺ Làm mới</button>
+      </div>
+      <div class="sim-canvas" style="padding:0; min-height:260px;">
+        <canvas id="pe-canvas" width="700" height="240" style="display:block;max-width:100%;background:#87CEEB"></canvas>
+      </div>
+      <div class="sim-controls" style="grid-template-columns:repeat(3,1fr)">
+        <div class="control-group"><label>Khối lượng m (kg)</label><input type="number" id="pe-mass" value="55" step="5" min="10" max="200" oninput="resetPE()"></div>
+        <div class="control-group"><label>Chiều cao h (m)</label><input type="number" id="pe-height" value="5" step="0.5" min="0.5" max="20" oninput="resetPE()"></div>
+        <div class="control-group" style="align-self:end">
+          <button class="btn btn-physics" onclick="calcPE()" style="width:100%;padding:10px">= Tính Thế năng</button>
+        </div>
+      </div>
+    </div>
+    <div class="data-panel">
+      <div class="data-cell"><div class="dc-label">Khối lượng m</div><div class="dc-val" id="pe-m-val">55<span class="dc-unit">kg</span></div></div>
+      <div class="data-cell"><div class="dc-label">Chiều cao h</div><div class="dc-val" id="pe-h-val">5.0<span class="dc-unit">m</span></div></div>
+      <div class="data-cell"><div class="dc-label">Thế năng Wt</div><div class="dc-val" id="pe-result-val">2695<span class="dc-unit">J</span></div></div>
+      <div class="data-cell"><div class="dc-label">Vận tốc chạm nước</div><div class="dc-val" id="pe-vland-val">9.9<span class="dc-unit">m/s</span></div></div>
+    </div>
+    <div class="energy-formula-display" id="pe-formula-display">
+      Wt = mgh = 55 × 9.8 × 5 = <b>2695 J</b> | v chạm nước = √(2gh) = <b>9.9 m/s</b>
+    </div>
+    <div class="info-grid">
+      <div class="info-block"><h4>Thế năng trọng trường</h4><ul><li>Wt = mgh (J)</li><li>g ≈ 9.8 m/s² (gia tốc trọng trường)</li><li>h: chiều cao so với mốc thế năng</li><li>Wt phụ thuộc vào vị trí, không phụ thuộc đường đi</li></ul></div>
+      <div class="info-block"><h4>Khi nhảy xuống hồ</h4><ul><li>Ban đầu: Wt = mgh, Wđ = 0</li><li>Đang rơi: Wt giảm → Wđ tăng</li><li>Chạm nước: Wt = 0, v = √(2gh)</li><li>Bảo toàn: Wt → Wđ (bỏ qua sức cản)</li></ul></div>
+    </div>
+  </div>
+</div>
+
+	<!-- MOMENT LỰC -->
+<div class="page" id="page-torque">
+  <div class="page-header physics-header">
+    <span class="page-badge physics-badge">⚡ Vật Lí</span>
+    <h2>Moment lực – Cân bằng đòn bẩy</h2>
+  </div>
+  <div class="sim-container">
+    <div class="sim-toolbar">
+      <span class="sim-title">// MOMENT LỰC. M = F × d</span>
+      <button class="btn btn-physics" id="torque-run-btn" onclick="startTorque()">▶ CHẠY</button>
+      <button class="btn btn-secondary" onclick="resetTorque()">↺ Reset</button>
+    </div>
+    <div class="sim-canvas" style="padding:0; min-height:320px;">
+      <canvas id="torque-canvas" width="700" height="320" style="display:block;max-width:100%;width:100%;background:#dff0ea"></canvas>
+    </div>
+    <!-- Moment force cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:2px solid var(--border);">
+      <div style="padding:12px 16px;background:#eef6ff;border-right:2px solid var(--border);">
+        <div style="font-size:11px;font-weight:700;color:#1565c0;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">↺ Moment M₁ (quay trái)</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <div class="control-group" style="margin:0;flex:1;min-width:100px"><label>F₁ (N)</label><input type="number" id="F1-torque" value="10" step="1" min="0" max="200" oninput="updateTorqueDisplay()"></div>
+          <div class="control-group" style="margin:0;flex:1;min-width:100px"><label>d₁ (m)</label><input type="number" id="d1-torque" value="0.8" step="0.1" min="0.1" max="3" oninput="updateTorqueDisplay()"></div>
+        </div>
+      </div>
+      <div style="padding:12px 16px;background:#fff5f5;">
+        <div style="font-size:11px;font-weight:700;color:#c0392b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">↻ Moment M₂ (quay phải)</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <div class="control-group" style="margin:0;flex:1;min-width:100px"><label>F₂ (N)</label><input type="number" id="F2-torque" value="20" step="1" min="0" max="200" oninput="updateTorqueDisplay()"></div>
+          <div class="control-group" style="margin:0;flex:1;min-width:100px"><label>d₂ (m)</label><input type="number" id="d2-torque" value="0.4" step="0.1" min="0.1" max="3" oninput="updateTorqueDisplay()"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="data-panel">
+    <div class="data-cell"><div class="dc-label">M₁ = F₁ × d₁</div><div class="dc-val" id="M1-val">8.0<span class="dc-unit">Nm</span></div></div>
+    <div class="data-cell"><div class="dc-label">M₂ = F₂ × d₂</div><div class="dc-val" id="M2-val">8.0<span class="dc-unit">Nm</span></div></div>
+    <div class="data-cell"><div class="dc-label">Hiệu moment</div><div class="dc-val" id="torque-diff">0.0<span class="dc-unit">Nm</span></div></div>
+    <div class="data-cell"><div class="dc-label">Kết quả</div><div class="dc-val" id="torque-result" style="font-size:13px;">⚖ Cân bằng</div></div>
+  </div>
+  <div style="padding:14px 18px;background:#eef6ff;border-top:2px solid var(--border);font-size:14px;font-family:'Nunito',sans-serif;color:#1565c0;font-weight:700;" id="torque-formula-display">
+    M₁ = 10 × 0.8 = 8.0 Nm | M₂ = 20 × 0.4 = 8.0 Nm → Cân bằng ✔
+  </div>
+  <div class="info-grid">
+    <div class="info-block"><h4>Điều kiện cân bằng</h4><ul><li>M₁ = M₂ ⟺ F₁ × d₁ = F₂ × d₂</li><li>Moment làm vật quay quanh trục cố định</li><li>M > 0: quay thuận chiều kim đồng hồ</li><li>M < 0: quay ngược chiều kim đồng hồ</li></ul></div>
+    <div class="info-block"><h4>Ứng dụng đòn bẩy</h4><ul><li>Kìm, kéo, bập bênh, xà beng</li><li>Lực nhỏ × cánh tay dài = Lực lớn × cánh tay ngắn</li><li>Vô lăng, tay quay cửa</li><li>Cơ thể người: khớp xương là điểm tựa</li></ul></div>
+  </div>
+</div>
+
+    <!-- ==================== VẬT LÍ: MẠCH ĐIỆN ==================== -->
+    <div class="page" id="page-circuit">
+      <div class="page-header physics-header">
+        <span class="page-badge physics-badge">⚡ Vật Lí</span>
+        <h2>Thực Hành Lắp Mạch Điện</h2>
+      </div>
+      <div class="sim-container">
+        <div class="sim-toolbar">
+          <span class="sim-title">// MẠCH ĐIỆN – THỰC HÀNH</span>
+          <button class="btn btn-physics" onclick="runCircuit()">⚡ ĐÓNG MẠCH</button>
+          <button class="btn btn-secondary" onclick="resetCircuit()">↺ LÀM MỚI</button>
+        </div>
+        <div class="sim-canvas" style="padding:0;background:#0d1117;min-height:320px">
+          <canvas id="circuit-canvas" width="700" height="320" style="display:block;max-width:100%;width:100%"></canvas>
+        </div>
+        <div class="sim-controls">
+          <div class="control-group">
+            <label>Sơ đồ mạch</label>
+            <select id="circuit-type" onchange="resetCircuit()">
+              <option value="series">Nối tiếp (R₁–R₂–Đèn)</option>
+              <option value="parallel">Song song (R₁ ∥ R₂)</option>
+              <option value="mixed">Hỗn hợp</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label>Nguồn điện E (V)</label>
+            <input type="number" id="circuit-emf" value="12" step="1" min="0" max="500" oninput="runCircuit(); document.getElementById('circuit-emf-val').textContent=this.value+'V'">
+            <span class="val" id="circuit-emf-val">12V</span>
+          </div>
+          <div class="control-group">
+            <label>Điện trở R₁ (Ω)</label>
+            <input type="number" id="circuit-r1" value="10" step="1" min="0" max="10000" oninput="runCircuit(); document.getElementById('circuit-r1-val').textContent=this.value+'Ω'">
+            <span class="val" id="circuit-r1-val">10Ω</span>
+          </div>
+          <div class="control-group">
+            <label>Điện trở R₂ (Ω)</label>
+            <input type="number" id="circuit-r2" value="10" step="1" min="0" max="10000" oninput="runCircuit(); document.getElementById('circuit-r2-val').textContent=this.value+'Ω'">
+            <span class="val" id="circuit-r2-val">10Ω</span>
+          </div>
+          <div class="control-group">
+            <label>Đèn (Ω)</label>
+            <input type="number" id="circuit-lamp" value="5" step="1" min="0" max="10000" oninput="runCircuit(); document.getElementById('circuit-lamp-val').textContent=this.value+'Ω'">
+            <span class="val" id="circuit-lamp-val">5Ω</span>
+          </div>
+          <div class="control-group">
+            <label>Khóa K</label>
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <button class="btn btn-physics" onclick="setSwitch(true)" id="sw-close-btn">Đóng K</button>
+              <button class="btn btn-secondary" onclick="setSwitch(false)" id="sw-open-btn">Mở K</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="data-panel">
+        <div class="data-cell"><div class="dc-label">Ampe kế (A)</div><div class="dc-val" id="circ-A">–<span class="dc-unit">A</span></div></div>
+        <div class="data-cell"><div class="dc-label">Vôn kế (V)</div><div class="dc-val" id="circ-V">–<span class="dc-unit">V</span></div></div>
+        <div class="data-cell"><div class="dc-label">R tổng</div><div class="dc-val" id="circ-Rtotal">–<span class="dc-unit">Ω</span></div></div>
+        <div class="data-cell"><div class="dc-label">Công suất</div><div class="dc-val" id="circ-P">–<span class="dc-unit">W</span></div></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Định luật Ohm</h4>
+          <ul>
+            <li>U = I·R</li>
+            <li>Nối tiếp: R = R₁ + R₂ + ...</li>
+            <li>Song song: 1/R = 1/R₁ + 1/R₂</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Dụng cụ đo</h4>
+          <ul>
+            <li>Ampe kế: đo cường độ dòng điện (A)</li>
+            <li>Vôn kế: đo hiệu điện thế (V)</li>
+            <li>Khóa K: đóng/mở mạch điện</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== HÓA HỌC: PHẢN ỨNG HÓA HỌC ==================== -->
+    <div class="page" id="page-acidbase">
+      <div class="page-header chem-header">
+        <span class="page-badge chem-badge">⚗ Hóa Học</span>
+        <h2>Kệ Hóa Chất</h2>
+      </div>
+      <div class="sim-container">
+        <div class="sim-toolbar">
+          <span class="sim-title">// KỆ HÓA CHẤT – THÍ NGHIỆM VỚI NỒNG ĐỘ MOL</span>
+          <button class="btn btn-chem" onclick="mixChemicals()">⚗ PHẢN ỨNG</button>
+          <button class="btn btn-secondary" onclick="resetChem()">↺ LÀM MỚI</button>
+        </div>
+
+        <!-- Kệ hóa chất -->
+        <div class="chem-shelf">
+          <div class="shelf-label">📦 Kệ hóa chất – Chọn 2 chất để phản ứng:</div>
+          <div class="shelf-row" id="shelf-row"></div>
+          <div class="shelf-selected" id="shelf-selected">
+            <div class="selected-slot" id="slot-A" onclick="clearSlot('A')">
+              <span class="slot-label">Chất A</span>
+              <span class="slot-name" id="slot-A-name">— chưa chọn —</span>
+            </div>
+            <div class="plus-sign">+</div>
+            <div class="selected-slot" id="slot-B" onclick="clearSlot('B')">
+              <span class="slot-label">Chất B</span>
+              <span class="slot-name" id="slot-B-name">— chưa chọn —</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nhập nồng độ mol và thể tích -->
+        <div class="concentration-inputs" style="display: flex; gap: 20px; margin: 0 16px 16px; padding: 12px; background: #eef2fa; border-radius: 12px; flex-wrap: wrap;">
+          <div class="control-group" style="flex:1;">
+            <label>Nồng độ chất A (mol/L)</label>
+            <input type="number" id="conc-A" value="0.1" step="0.01" min="0.001" max="100" style="width:100%">
+          </div>
+          <div class="control-group" style="flex:1;">
+            <label>Nồng độ chất B (mol/L)</label>
+            <input type="number" id="conc-B" value="0.1" step="0.01" min="0.001" max="100" style="width:100%">
+          </div>
+          <div class="control-group" style="flex:1;">
+            <label>Thể tích mỗi chất (L)</label>
+            <input type="number" id="vol-A" value="1.0" step="0.1" min="0.1" max="100" style="width:100%">
+            <span style="font-size:11px">giả sử trộn 2 thể tích bằng nhau</span>
+          </div>
+        </div>
+
+        <!-- Giấy quỳ tím -->
+        <div class="litmus-section">
+          <div class="litmus-label">🌸 Thử với giấy quỳ tím:</div>
+          <div class="litmus-display" id="litmus-display">
+            <div class="litmus-paper" id="litmus-paper">
+              <span id="litmus-text">Quỳ tím</span>
+            </div>
+            <div class="litmus-result" id="litmus-result">Chưa thử</div>
+          </div>
+        </div>
+
+        <!-- Beaker phản ứng -->
+        <div class="beaker-section">
+          <div class="beaker-wrap" id="beaker-wrap">
+            <div class="beaker" id="beaker-acid">
+              <div class="beaker-label" id="beaker-A-label">Chất A</div>
+              <div class="beaker-liquid" id="liq-acid" style="height:60%"></div>
+            </div>
+            <div class="plus-sign2">+</div>
+            <div class="beaker" id="beaker-base">
+              <div class="beaker-label" id="beaker-B-label">Chất B</div>
+              <div class="beaker-liquid" id="liq-base" style="height:60%"></div>
+            </div>
+            <div class="reaction-arrow">→</div>
+            <div class="beaker" id="beaker-result">
+              <div class="beaker-label">Sản phẩm</div>
+              <div class="beaker-liquid" id="liq-result" style="height:0%"></div>
+            </div>
+            <div id="ph-display" style="text-align:center;align-self:center;min-width:80px">
+              <div style="font-size:11px;color:#888;margin-bottom:4px">pH hỗn hợp</div>
+              <div style="font-size:36px;font-weight:800;color:#00b894" id="ph-val">7.0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-panel">
+        <div class="data-cell"><div class="dc-label">Chất A</div><div class="dc-val" id="chem-A" style="font-size:13px">–</div></div>
+        <div class="data-cell"><div class="dc-label">Chất B</div><div class="dc-val" id="chem-B" style="font-size:13px">–</div></div>
+        <div class="data-cell"><div class="dc-label">pH</div><div class="dc-val" id="chem-ph-val">–</div></div>
+        <div class="data-cell"><div class="dc-label">Môi trường</div><div class="dc-val" id="chem-env" style="font-size:12px">–</div></div>
+      </div>
+
+      <div class="reaction-equation" id="reaction-equation" style="display:none">
+        <h4>⚗ Phương trình phản ứng:</h4>
+        <div id="reaction-text" class="equation-text"></div>
+        <div id="reaction-note" class="equation-note"></div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Giấy quỳ tím</h4>
+          <ul>
+            <li>Acid → quỳ hóa đỏ (pH &lt; 7)</li>
+            <li>Base → quỳ hóa xanh (pH &gt; 7)</li>
+            <li>Trung tính → quỳ không đổi màu</li>
+            <li>Dùng để nhận biết nhanh acid/base</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Tính pH dựa vào nồng độ</h4>
+          <ul>
+            <li>Acid mạnh: pH = -log(C<sub>a</sub>)</li>
+            <li>Acid yếu: pH = ½(pK<sub>a</sub> - log C<sub>a</sub>)</li>
+            <li>Base mạnh: pH = 14 + log(C<sub>b</sub>)</li>
+            <li>Base yếu: pH = 14 - ½(pK<sub>b</sub> - log C<sub>b</sub>)</li>
+            <li>Trộn 2 chất: chất dư quyết định pH</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== HÓA HỌC: BẢNG TUẦN HOÀN ==================== -->
+    <div class="page" id="page-periodic">
+      <div class="page-header chem-header">
+        <span class="page-badge chem-badge">⚗ Hóa Học</span>
+        <h2>Bảng Tuần Hoàn Các Nguyên Tố Hóa Học</h2>
+      </div>
+      
+      <div class="periodic-container">
+        <div class="sim-toolbar">
+          <span class="sim-title">// BẢNG TUẦN HOÀN 118 NGUYÊN TỐ</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <input type="number" id="atomic-number-input" placeholder="Số hiệu (1–118)" min="1" max="118"
+              style="padding:7px 12px;border-radius:8px;border:2px solid #27ae60;font-size:13px;width:180px;outline:none;background:#1a2640;color:#fff;"
+              oninput="lookupByAtomicNumber(this.value)">
+            <button class="btn btn-chem" onclick="resetPeriodicHighlight()">↺ ĐÓNG CHI TIẾT</button>
+          </div>
+        </div>
+
+        <div class="periodic-legend">
+          <div class="legend-item"><span class="legend-box alkali-metal"></span> Kim loại kiềm</div>
+          <div class="legend-item"><span class="legend-box alkaline-earth"></span> Kiềm thổ</div>
+          <div class="legend-item"><span class="legend-box transition-metal"></span> Chuyển tiếp</div>
+          <div class="legend-item"><span class="legend-box post-transition"></span> Hậu chuyển tiếp</div>
+          <div class="legend-item"><span class="legend-box metalloid"></span> Á kim</div>
+          <div class="legend-item"><span class="legend-box nonmetal"></span> Phi kim</div>
+          <div class="legend-item"><span class="legend-box halogen"></span> Halogen</div>
+          <div class="legend-item"><span class="legend-box noble-gas"></span> Khí hiếm</div>
+          <div class="legend-item"><span class="legend-box lanthanide"></span> Lanthanide</div>
+          <div class="legend-item"><span class="legend-box actinide"></span> Actinide</div>
+        </div>
+        
+        <div class="periodic-grid" id="periodic-grid"></div>
+	  
+        <div class="element-detail" id="element-detail">
+          <div class="detail-placeholder">
+            <p>🔍 Bấm vào một nguyên tố bất kỳ trong bảng, hoặc nhập số hiệu nguyên tử ở trên để xem thông tin chi tiết.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+	
+    <!-- ==================== SINH HỌC: DNA ==================== -->
+    <div class="page" id="page-dna">
+      <div class="page-header bio-header">
+        <span class="page-badge bio-badge">🌿 Sinh Học</span>
+        <h2>Lắp Ráp Chuỗi DNA</h2>
+      </div>
+      <div class="sim-container">
+        <div class="sim-toolbar">
+          <span class="sim-title">// LẮP RÁP DNA – CẶP BASE NITƠ</span>
+          <button class="btn btn-bio" onclick="checkDNA()">✓ KIỂM TRA</button>
+          <button class="btn btn-secondary" onclick="resetDNA()">↺ LÀM MỚI</button>
+        </div>
+
+        <!-- Chọn số cặp nucleotide -->
+        <div style="padding:12px 16px;background:#eafaf1;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <label style="font-size:13px;font-weight:700;color:#1a6e3a;">🔢 Số cặp nucleotide:</label>
+          <input type="number" id="dna-pair-count" value="6" min="3" max="12" step="1"
+            style="width:70px;padding:6px 10px;border-radius:8px;border:2px solid #27ae60;font-size:14px;font-weight:700;outline:none;">
+          <button class="btn btn-bio" onclick="applyDNAPairCount()" style="padding:7px 16px;font-size:13px;">✔ Áp dụng</button>
+          <span style="font-size:12px;color:#666;">(3 – 12 cặp)</span>
+        </div>
+
+        <div class="dna-workspace">
+          <div class="dna-bases-box">
+            <div class="dna-box-label">🧬 Hộp base nitơ – Kéo vào chuỗi:</div>
+            <div class="bases-palette" id="bases-palette">
+              <div class="base-chip base-A" draggable="true" ondragstart="dragBase(event,'A')">A</div>
+              <div class="base-chip base-T" draggable="true" ondragstart="dragBase(event,'T')">T</div>
+              <div class="base-chip base-G" draggable="true" ondragstart="dragBase(event,'G')">G</div>
+              <div class="base-chip base-C" draggable="true" ondragstart="dragBase(event,'C')">C</div>
+            </div>
+          </div>
+
+          <div class="dna-strands" id="dna-strands">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div class="dna-click-section">
+            <div class="dna-click-label">Hoặc nhấn vào ô trống để chọn base:</div>
+          </div>
+        </div>
+
+        <div class="dna-legend">
+          <div class="legend-item"><span class="base-chip base-A sm">A</span> Adenine – cặp với T</div>
+          <div class="legend-item"><span class="base-chip base-T sm">T</span> Thymine – cặp với A</div>
+          <div class="legend-item"><span class="base-chip base-G sm">G</span> Guanine – cặp với C</div>
+          <div class="legend-item"><span class="base-chip base-C sm">C</span> Cytosine – cặp với G</div>
+        </div>
+
+        <div class="dna-score" id="dna-score"></div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Nguyên tắc bổ sung</h4>
+          <ul>
+            <li>A luôn cặp với T (2 liên kết H)</li>
+            <li>G luôn cặp với C (3 liên kết H)</li>
+            <li>Hai chuỗi song song ngược chiều</li>
+            <li>Cấu trúc xoắn kép (double helix)</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Cấu trúc DNA</h4>
+          <ul>
+            <li>DNA gồm 4 loại nucleotide</li>
+            <li>Đường – phosphate – base</li>
+            <li>Watson & Crick, 1953</li>
+            <li>Mang thông tin di truyền</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SINH HỌC: TẾ BÀO ==================== -->
+<div class="page" id="page-cell">
+  <div class="page-header bio-header">
+    <span class="page-badge bio-badge">🌿 Sinh Học</span>
+    <h2>Cấu tạo tế bào thực vật – Hành tây</h2>
+  </div>
+  <div class="sim-container">
+    <div class="sim-toolbar">
+      <span class="sim-title">// KÍNH HIỂN VI ẢO – TẾ BÀO HÀNH TÂY</span>
+      <button class="btn btn-bio" onclick="highlightOrganelle(null)">🔍 Bỏ chọn</button>
+      <button class="btn btn-secondary" onclick="resetCellView()">↺ Làm mới</button>
+    </div>
+    <div class="sim-canvas" style="padding:0; background:#071c0f; min-height:420px; justify-content:center; align-items:center;">
+      <!-- Lens overlay -->
+      <div style="position:relative; display:inline-block;">
+        <canvas id="cell-canvas" width="700" height="400"
+          style="display:block; max-width:100%; border-radius:12px; cursor:crosshair;
+          box-shadow:0 0 40px rgba(46,204,113,0.25), 0 0 0 3px #27ae6060;"></canvas>
+        <div id="cell-tooltip" style="
+          position:absolute; top:8px; left:50%; transform:translateX(-50%);
+          background:rgba(7,28,15,0.88); border:1.5px solid #27ae60;
+          color:#80ff9e; font-family:'Space Mono',monospace; font-size:12px;
+          padding:5px 16px; border-radius:20px; pointer-events:none;
+          opacity:0; transition:opacity .2s; white-space:nowrap;
+          backdrop-filter:blur(4px);
+          ">Hover lên tế bào</div>
+      </div>
+    </div>
+
+    <!-- Bào quan selector dạng pill chips -->
+    <div style="padding:16px 18px 8px; background:#f7fbff; border-top:2px solid var(--border);">
+      <div style="font-size:11px; font-weight:700; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px;">🧬 Chọn bào quan để xem chi tiết:</div>
+      <div id="cell-chips" style="display:flex; flex-wrap:wrap; gap:8px;">
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('wall')">🟫 Thành tế bào</button>
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('membrane')">🟡 Màng sinh chất</button>
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('nucleus')">🟠 Nhân tế bào</button>
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('vacuole')">🔵 Không bào</button>
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('chloroplast')">🟢 Lục lạp</button>
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('mitochondria')">🔴 Ty thể</button>
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('golgi')">🩷 Bộ máy Golgi</button>
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('er')">🟣 Lưới nội chất</button>
+        <button class="cell-chip" onclick="showOrganelleInfoFromChip('ribosome')">⚪ Ribosome</button>
+      </div>
+    </div>
+
+    <!-- Info panel đẹp -->
+    <div id="organelle-info-panel" style="
+      margin:0; padding:0; background:#f7fbff;
+      border-top:2px solid var(--border);
+      display:none; flex-direction:row; align-items:stretch; gap:0;
+      ">
+      <div id="organelle-icon-strip" style="
+        width:8px; flex-shrink:0; background:#27ae60; border-radius:0;
+      "></div>
+      <div style="padding:16px 20px; flex:1;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+          <span id="organelle-emoji" style="font-size:24px;"></span>
+          <div>
+            <div style="font-size:15px; font-weight:800; color:var(--text);" id="organelle-name">–––</div>
+            <div style="font-size:11px; color:var(--muted); letter-spacing:.05em;" id="organelle-latin"></div>
+          </div>
+        </div>
+        <div id="organelle-desc" style="font-size:13px; color:#334; line-height:1.7; padding:10px 0;"></div>
+        <div id="organelle-fun" style="
+          font-size:12px; background:#eafaf1; border-left:3px solid #27ae60;
+          border-radius:0 8px 8px 0; padding:8px 12px; color:#1a6e3a; display:none;
+        "></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-block">
+      <h4>📌 Hướng dẫn sử dụng</h4>
+      <ul>
+        <li>Di chuột vào tế bào để xem tooltip tên bào quan</li>
+        <li>Click chip màu bên trên để xem thông tin chi tiết</li>
+        <li>Tế bào hành tây: không bào lớn, lục lạp ít/không màu</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>🧫 Đặc điểm tế bào thực vật</h4>
+      <ul>
+        <li><strong>Thành cellulose</strong> – tạo hình dạng cứng cáp</li>
+        <li><strong>Lục lạp</strong> – thực hiện quang hợp (tế bào lá)</li>
+        <li><strong>Không bào lớn</strong> – dự trữ, tạo áp suất thẩm thấu</li>
+        <li><strong>Màng nhân</strong> – bảo vệ thông tin di truyền</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </main>
+</div>
+
+<!-- STATUS BAR -->
+<div class="statusbar">
+  <div class="status-item"><span class="status-dot"></span><span>Hệ thống hoạt động</span></div>
+  <span>|</span>
+  <span id="status-page">TRANG CHỦ</span>
+  <span>|</span>
+  <span>ONLINE EXPERIMENT</span>
+</div>
+
+<!-- FEEDBACK MODAL -->
+<div class="modal-overlay" id="feedbackModal">
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSfHP5RRqm_vSa1Vv-VrfyPkGx4UfMlJZz5BZPM5elPQpIYdtA/formResponse" method="POST" target="hidden_iframe" id="feedbackForm" style="margin:0;padding:0">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>📬 Gửi ý kiến phản hồi</h3>
+        <button type="button" class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-form-body">
+        <label>Họ và tên</label>
+        <input type="text" name="entry.1079995345" id="fb-name" placeholder="Tên của bạn...">
+        <label>Nội dung</label>
+        <textarea name="entry.2005914619" id="fb-content" placeholder="Nhập nội dung phản hồi..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('feedbackForm').reset();closeModal()">Hủy</button>
+        <button type="submit" class="btn-send">Gửi phản hồi →</button>
+      </div>
+      <div class="success-msg" id="success-msg">
+        <div class="check">✅</div>
+        <div>Cảm ơn bạn đã gửi phản hồi!<br>Chúng tôi sẽ xem xét và cải thiện sớm nhất.</div>
+      </div>
+    </div>
+  </form>
+</div>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none" onload="handleFormResponse()"></iframe>
+
+<script>
+  // Modal functions
+  function openModal() {
+    document.getElementById('feedbackModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('feedbackModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Close modal on overlay click
+  document.getElementById('feedbackModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.getElementById('openModal').addEventListener('click', openModal);
+
+  let isSubmitting = false;
+  document.getElementById('feedbackForm').onsubmit = function() { isSubmitting = true; };
+  function handleFormResponse() {
+    if (isSubmitting) {
+      const successMsg = document.getElementById('success-msg');
+      if (successMsg) successMsg.style.display = 'flex';
+      document.getElementById('feedbackForm').reset();
+      setTimeout(() => {
+        if (successMsg) successMsg.style.display = 'none';
+        closeModal(); isSubmitting = false;
+      }, 2500);
+    }
+  }
+</script>
+<script src="script.js"></script>
+</body>
+</html>
